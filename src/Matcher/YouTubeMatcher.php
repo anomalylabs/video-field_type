@@ -24,7 +24,7 @@ class YouTubeMatcher extends AbstractMatcher
      *
      * @var string
      */
-    protected $regex = '@^(?:(?:https?://)?(?:www\.)?youtu\.?be(?:\.com)?/)(?:watch\?v=|v/)([a-zA-Z0-9_]*)@';
+    protected $regex = '/^(?:(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?\/)(?:watch\?v=|v\/)?([a-zA-Z0-9_]*)/';
 
     /**
      * The HTML utility.
