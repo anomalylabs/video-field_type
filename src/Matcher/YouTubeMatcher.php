@@ -24,7 +24,7 @@ class YouTubeMatcher extends AbstractMatcher
      *
      * @var string
      */
-    protected $pattern = '/(http:|https:)?\/\/(www\.)?(youtube.com|youtu.be)\/(watch)?(\?v=)?(\S+)?/';
+    protected $pattern = '/^(?:(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?\/)(?:watch\?v=|v\/)?([a-zA-Z0-9_-]*)/';
 
     /**
      * Return the video ID from the video URL.
