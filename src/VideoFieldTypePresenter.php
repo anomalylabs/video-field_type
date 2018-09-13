@@ -48,7 +48,7 @@ class VideoFieldTypePresenter extends FieldTypePresenter
             function (Collection $options) use ($matcher, $attributes, $parameters) {
 
                 // Autoplay normalization
-                if ($options->get('autoplay', false) == true) {
+                if ($options->pull('autoplay', false) == true) {
                     $parameters['autoplay'] = array_get($parameters, 'autoplay', true);
                 }
 

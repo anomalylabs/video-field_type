@@ -77,14 +77,14 @@ class YouTubeMatcher extends AbstractMatcher
             $parameters['rel'] = 0;
         }
 
-        // Default branding behavior
-        if (!array_key_exists('modestbranding', $parameters)) {
-            $parameters['modestbranding'] = 1;
-        }
-
         // Default pause behavior
         if (!array_key_exists('ecver', $parameters)) {
             $parameters['ecver'] = 2;
+        }
+
+        // Show info option
+        if (array_get($attributes, 'showinfo') == false) {
+            $parameters['showinfo'] = array_get($parameters, 'showinfo', 0);
         }
 
         return '<iframe

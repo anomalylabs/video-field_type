@@ -64,6 +64,13 @@ class VimeoMatcher extends AbstractMatcher
      */
     public function iframe($id, array $attributes = [], array $parameters = [])
     {
+
+        // Show info option
+        if (array_get($attributes, 'showinfo') == false) {
+            $parameters['title']  = array_get($parameters, 'title', 0);
+            $parameters['byline'] = array_get($parameters, 'byline', 0);
+        }
+
         return '<iframe
             frameborder="0"
             src="https://player.vimeo.com/video/' . $id . '?' . http_build_query($parameters) . '"
