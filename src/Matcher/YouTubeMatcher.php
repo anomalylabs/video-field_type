@@ -71,7 +71,21 @@ class YouTubeMatcher extends AbstractMatcher
      */
     public function iframe($id, array $attributes = [], array $parameters = [])
     {
-        $parameters = $parameters ?: ['rel' => 0];
+
+        // Default rel behavior
+        if (!array_key_exists('rel', $parameters)) {
+            $parameters['rel'] = 0;
+        }
+
+        // Default branding behavior
+        if (!array_key_exists('modestbranding', $parameters)) {
+            $parameters['modestbranding'] = 1;
+        }
+
+        // Default pause behavior
+        if (!array_key_exists('ecver', $parameters)) {
+            $parameters['ecver'] = 2;
+        }
 
         return '<iframe
             frameborder="0"
