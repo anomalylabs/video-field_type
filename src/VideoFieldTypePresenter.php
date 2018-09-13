@@ -46,7 +46,20 @@ class VideoFieldTypePresenter extends FieldTypePresenter
         return new PluginCriteria(
             'render',
             function (Collection $options) use ($matcher, $attributes, $parameters) {
-                return $matcher->iframe($matcher->id($this->object->getValue()), $options->merge($attributes)->all(), $parameters);
+
+                // Autoplay normalization
+                if ($options->get('autoplay', false) == true) {
+                    $parameters['autoplay'] = array_get($parameters, 'autoplay', true);
+                }
+
+                // Normalize allow attribute
+                $attributes['allow'] = array_get($attributes, 'allow', '') . 'autoplay;';
+
+                return $matcher->iframe(
+                    $matcher->id($this->object->getValue()),
+                    $options->merge($attributes)->all(),
+                    $parameters
+                );
             }
         );
     }
