@@ -113,6 +113,10 @@ class YouTubeMatcher extends AbstractMatcher
      */
     public function image($id, $image = null)
     {
-        return $this->image->make('https://img.youtube.com/vi/' . $id . '/' . ($image ?: 1) . '.jpg', 'image');
+        if (is_null($image)) {
+            $image = 1;
+        }
+
+        return $this->image->make('https://img.youtube.com/vi/' . $id . '/' . $image . '.jpg', 'image');
     }
 }
