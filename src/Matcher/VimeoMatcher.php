@@ -85,10 +85,9 @@ class VimeoMatcher extends AbstractMatcher
      */
     public function cover($id)
     {
-        $client = new Client();
-        $res    = $client->request('GET', 'http://vimeo.com/api/v2/video/' . $id . '.json');
+        $json = $this->json($id);
 
-        dd($res->getBody());
+        return $this->image->make($json['thumbnail_large'], 'image');
     }
 
     /**
@@ -100,10 +99,28 @@ class VimeoMatcher extends AbstractMatcher
      */
     public function image($id, $image = null)
     {
-        $client = new Client();
-        $res    = $client->request('GET', 'http://vimeo.com/api/v2/video/' . $id . '.json');
+        $json = $this->json($id);
 
-        dd($res->getBody());
+        return $this->image->make($json['thumbnail_' . ($image ?: 'large')], 'image');
+    }
+
+    /**
+     * Return the JSON information.
+     *
+     * @param int $id
+     * @return array
+     */
+    protected function json($id)
+    {
+        return cache()->rememberForever(
+            'http://vimeo.com/api/v2/video/' . $id . '.json',
+            function () use ($id) {
+
+                $res = (new Client())->request('GET', 'http://vimeo.com/api/v2/video/' . $id . '.json');
+
+                return array_get(json_decode($res->getBody()->getContents(), true), 0);
+            }
+        );
     }
 
 }
