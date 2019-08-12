@@ -81,13 +81,19 @@ class VimeoMatcher extends AbstractMatcher
      * Return the video's cover image.
      *
      * @param $id
-     * @return Image
+     * @return Image|null
      */
     public function cover($id)
     {
-        $json = $this->json($id);
+        if (!$json = $this->json($id)) {
+            return null;
+        }
 
-        return $this->image->make(array_get($json, 'thumbnail_large'), 'image');
+        if (!$image = array_get($json, 'thumbnail_large')) {
+            return null;
+        }
+
+        return $this->image->make($image, 'image');
     }
 
     /**
@@ -95,13 +101,19 @@ class VimeoMatcher extends AbstractMatcher
      *
      * @param      $id
      * @param null $image
-     * @return Image
+     * @return Image|null
      */
     public function image($id, $image = null)
     {
-        $json = $this->json($id);
+        if (!$json = $this->json($id)) {
+            return null;
+        }
 
-        return $this->image->make(array_get($json, 'thumbnail_' . ($image ?: 'large')), 'image');
+        if (!$image = array_get($json, 'thumbnail_' . ($image ?: 'large'))) {
+            return null;
+        }
+
+        return $this->image->make($image, 'image');
     }
 
     /**
