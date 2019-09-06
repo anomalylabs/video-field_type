@@ -5,7 +5,6 @@ use Anomaly\Streams\Platform\Addon\Plugin\PluginCriteria;
 use Anomaly\Streams\Platform\Support\Collection;
 use Anomaly\VideoFieldType\Matcher\Command\GetMatcher;
 use Anomaly\VideoFieldType\Matcher\Contract\MatcherInterface;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class VideoFieldTypePresenter
@@ -16,8 +15,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class VideoFieldTypePresenter extends FieldTypePresenter
 {
-
-    use DispatchesJobs;
 
     /**
      * The decorated object.
