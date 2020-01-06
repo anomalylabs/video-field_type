@@ -1,4 +1,6 @@
-<?php namespace Anomaly\VideoFieldType;
+<?php
+
+namespace Anomaly\VideoFieldType;
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 
@@ -13,19 +15,9 @@ class VideoFieldType extends FieldType
 {
 
     /**
-     * Base field type rules.
-     *
-     * @var array
-     */
-    protected $rules = [
-        'url',
-    ];
-
-    /**
      * The field input view.
      *
      * @var string
      */
     protected $inputView = 'anomaly.field_type.video::input';
-
 }
