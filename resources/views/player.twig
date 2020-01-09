@@ -1,8 +1,13 @@
 <style type="text/css">
-    {{ asset_inline('anomaly.field_type.video::css/plyr.css') }}
-</style>
+	{{asset_inline('anomaly.field_type.video::css/plyr.css')}}</style>
 
 {{ asset_add('scripts.js', 'anomaly.field_type.video::js/plyr.js') }}
 {{ asset_add('scripts.js', 'anomaly.field_type.video::js/player.js') }}
 
-<div data-type="{{ video.provider|lower }}" data-video-id="{{ video.id }}"></div>
+{% if video.provider == 'File' %}
+	<video poster="/path/to/poster.jpg" id="player" playsinline controls>
+		<source src="{{ video.embed }}" type="video/mp4"/>
+	</video>
+{% else %}
+	<div data-type="{{ video.provider|lower }}" data-video-id="{{ video.id }}"></div>
+{% endif %}
