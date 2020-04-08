@@ -59,7 +59,7 @@ class FileMatcher extends AbstractMatcher
      */
     public function embed($url)
     {
-        return $this->instance($url)->url();
+        return $this->instance($url)->route('stream');
     }
 
     /**
