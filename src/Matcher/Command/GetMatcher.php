@@ -1,6 +1,7 @@
 <?php namespace Anomaly\VideoFieldType\Matcher\Command;
 
 use Anomaly\VideoFieldType\Matcher\Contract\MatcherInterface;
+use Anomaly\VideoFieldType\Matcher\FallbackMatcher;
 
 /**
  * Class GetMatcher
@@ -42,7 +43,7 @@ class GetMatcher
             }
         }
 
-        return null;
+        return app(FallbackMatcher::class);
     }
 
     /**
