@@ -39,7 +39,7 @@ class VideoFieldTypePresenter extends FieldTypePresenter
         }
 
         /* @var \Anomaly\VideoFieldType\Matcher\Contract\\Anomaly\VideoFieldType\Matcher\Contract\MatcherInterface $matcher */
-        $matcher = dispatch_now(new GetMatcher($this->object->getValue()));
+        $matcher = dispatch_sync(new GetMatcher($this->object->getValue()));
 
         return new PluginCriteria(
             'render',
@@ -76,7 +76,7 @@ class VideoFieldTypePresenter extends FieldTypePresenter
         }
 
         /* @var \Anomaly\VideoFieldType\Matcher\Contract\MatcherInterface $matcher */
-        $matcher = dispatch_now(new GetMatcher($this->object->getValue()));
+        $matcher = dispatch_sync(new GetMatcher($this->object->getValue()));
 
         return new PluginCriteria(
             'render',
@@ -105,7 +105,7 @@ class VideoFieldTypePresenter extends FieldTypePresenter
         }
 
         /* @var \Anomaly\VideoFieldType\Matcher\Contract\MatcherInterface $matcher */
-        $matcher = dispatch_now(new GetMatcher($this->object->getValue()));
+        $matcher = dispatch_sync(new GetMatcher($this->object->getValue()));
 
         return $matcher->embed($this->object->getValue());
     }
@@ -122,7 +122,7 @@ class VideoFieldTypePresenter extends FieldTypePresenter
         }
 
         /* @var \Anomaly\VideoFieldType\Matcher\Contract\MatcherInterface $matcher */
-        $matcher = dispatch_now(new GetMatcher($this->object->getValue()));
+        $matcher = dispatch_sync(new GetMatcher($this->object->getValue()));
 
         return $matcher->id($this->object->getValue());
     }
@@ -139,7 +139,7 @@ class VideoFieldTypePresenter extends FieldTypePresenter
         }
 
         /* @var \Anomaly\VideoFieldType\Matcher\Contract\MatcherInterface $matcher */
-        $matcher = dispatch_now(new GetMatcher($this->object->getValue()));
+        $matcher = dispatch_sync(new GetMatcher($this->object->getValue()));
 
         return $matcher->getProvider();
     }
@@ -171,7 +171,7 @@ class VideoFieldTypePresenter extends FieldTypePresenter
         }
 
         /* @var \Anomaly\VideoFieldType\Matcher\Contract\MatcherInterface $matcher */
-        $matcher = dispatch_now(new GetMatcher($this->object->getValue()));
+        $matcher = dispatch_sync(new GetMatcher($this->object->getValue()));
 
         return $matcher->cover($this->id());
     }
@@ -189,7 +189,7 @@ class VideoFieldTypePresenter extends FieldTypePresenter
         }
 
         /* @var \Anomaly\VideoFieldType\Matcher\Contract\MatcherInterface $matcher */
-        $matcher = dispatch_now(new GetMatcher($this->object->getValue()));
+        $matcher = dispatch_sync(new GetMatcher($this->object->getValue()));
 
         return $matcher->image($this->id(), $image);
     }

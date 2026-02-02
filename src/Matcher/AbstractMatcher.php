@@ -2,7 +2,7 @@
 
 use Anomaly\Streams\Platform\Image\Image;
 use Anomaly\VideoFieldType\Matcher\Contract\MatcherInterface;
-use Collective\Html\HtmlBuilder;
+use Anomaly\Streams\Platform\Html\HtmlBuilder;
 
 /**
  * Class AbstractMatcher

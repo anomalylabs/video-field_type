@@ -109,6 +109,6 @@ class FileMatcher extends AbstractMatcher
      */
     protected function instance($url)
     {
-        return dispatch_now(new GetFile($url));
+        return dispatch_sync(new GetFile($url));
     }
 }
