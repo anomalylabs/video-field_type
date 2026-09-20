@@ -84,29 +84,25 @@ class FlipbaseMatcher extends AbstractMatcher
     /**
      * Return the video's cover image.
      *
-     * @todo Currently this is not implmented.
+     * @todo Currently this is not implemented.
      * @param $id
-     * @return Image
+     * @return Image|null
      */
     public function cover($id)
     {
-        dd('not yet implemented');
-
-        return '';
+        return null;
     }
 
     /**
      * Return a video image.
      *
-     * @todo Currently this is not implmented.
+     * @todo Currently this is not implemented.
      * @param      $id
      * @param null $image
-     * @return Image
+     * @return Image|null
      */
     public function image($id, $image = null)
     {
-        dd('not yet implemented');
-
-        return '';
+        return null;
     }
 }
