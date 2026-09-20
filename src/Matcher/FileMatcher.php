@@ -55,11 +55,16 @@ class FileMatcher extends AbstractMatcher
      * Return the embed URL for a given video URl.
      *
      * @param $url
-     * @return string
+     * @return string|null
      */
     public function embed($url)
     {
-        return $this->instance($url)->route('stream');
+        /* @var FileInterface $video */
+        if (!$video = $this->instance($url)) {
+            return null;
+        }
+
+        return $video->route('stream');
     }
 
     /**
@@ -72,9 +77,13 @@ class FileMatcher extends AbstractMatcher
      */
     public function iframe($id, array $attributes = [], array $parameters = [])
     {
+        if (!$src = $this->embed($id)) {
+            return '';
+        }
+
         return '<iframe
             frameborder="0"
-            src="' . $this->attribute($this->embed($id)) . '"
+            src="' . $this->attribute($src) . '"
             ' . $this->html->attributes($attributes) . '></iframe>';
     }
 
