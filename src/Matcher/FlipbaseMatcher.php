@@ -72,10 +72,12 @@ class FlipbaseMatcher extends AbstractMatcher
     {
         $segments = explode(':', $id);
 
+        $src = 'https://' . $segments[0] . '.flipbase.com/embed/' . $segments[1]
+            . '?' . http_build_query($parameters);
+
         return '<iframe
             frameborder="0"
-            src="https://' . $segments[0] . '.flipbase.com/embed/' . $segments[1]
-            . '?' . http_build_query($parameters) . '"'
+            src="' . $this->attribute($src) . '"'
             . $this->html->attributes($attributes) . '></iframe>';
     }
 

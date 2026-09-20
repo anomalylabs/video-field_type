@@ -30,7 +30,7 @@ class UrlMatcher extends AbstractMatcher
      */
     public function id($url)
     {
-        return basename($url);
+        return $url;
     }
 
     /**
@@ -52,6 +52,10 @@ class UrlMatcher extends AbstractMatcher
      */
     public function embed($url)
     {
+        if (!$this->schemeIsAllowed($url)) {
+            return null;
+        }
+
         return $url;
     }
 
@@ -65,9 +69,13 @@ class UrlMatcher extends AbstractMatcher
      */
     public function iframe($id, array $attributes = [], array $parameters = [])
     {
+        if (!$src = $this->embed($id)) {
+            return '';
+        }
+
         return '<iframe
             frameborder="0"
-            src="' . $this->embed($id) . '"
+            src="' . $this->attribute($src) . '"
             ' . $this->html->attributes($attributes) . '></iframe>';
     }
 

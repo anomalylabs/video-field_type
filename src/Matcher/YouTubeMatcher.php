@@ -87,9 +87,11 @@ class YouTubeMatcher extends AbstractMatcher
             $parameters['showinfo'] = array_get($parameters, 'showinfo', 0);
         }
 
+        $src = 'https://www.youtube.com/embed/' . $id . '?' . http_build_query($parameters);
+
         return '<iframe
             frameborder="0"
-            src="https://www.youtube.com/embed/' . $id . '?' . http_build_query($parameters) . '"
+            src="' . $this->attribute($src) . '"
             ' . $this->html->attributes($attributes) . '></iframe>';
     }
 

@@ -71,9 +71,11 @@ class VimeoMatcher extends AbstractMatcher
             $parameters['byline'] = array_get($parameters, 'byline', 0);
         }
 
+        $src = 'https://player.vimeo.com/video/' . $id . '?' . http_build_query($parameters);
+
         return '<iframe
             frameborder="0"
-            src="https://player.vimeo.com/video/' . $id . '?' . http_build_query($parameters) . '"
+            src="' . $this->attribute($src) . '"
             ' . $this->html->attributes($attributes) . '></iframe>';
     }
 

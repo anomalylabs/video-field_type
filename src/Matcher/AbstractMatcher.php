@@ -48,6 +48,16 @@ abstract class AbstractMatcher implements MatcherInterface
     }
 
     /**
+     * The allowed URL schemes.
+     *
+     * @var array
+     */
+    protected $schemes = [
+        'http',
+        'https',
+    ];
+
+    /**
      * Return the video ID from the video URL.
      *
      * @param $url
@@ -97,6 +107,49 @@ abstract class AbstractMatcher implements MatcherInterface
      * @return Image
      */
     abstract public function image($id, $image = null);
+
+    /**
+     * Return a value encoded for an HTML attribute.
+     *
+     * @param  string $value
+     * @return string
+     */
+    protected function attribute($value)
+    {
+        return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8', false);
+    }
+
+    /**
+     * Return the scheme of a value.
+     *
+     * Browsers ignore control characters within
+     * a scheme so they are stripped before it
+     * is read back out of the value.
+     *
+     * @param  string $value
+     * @return string|null
+     */
+    protected function scheme($value)
+    {
+        $value = preg_replace('/[\x00-\x20\x7f]/', '', (string)$value);
+
+        return preg_match('/^([a-z][a-z0-9+.\-]*):/i', $value, $matches) ? $matches[1] : null;
+    }
+
+    /**
+     * Return whether a value's scheme is allowed.
+     *
+     * @param  string $value
+     * @return bool
+     */
+    protected function schemeIsAllowed($value)
+    {
+        if (!$scheme = $this->scheme($value)) {
+            return false;
+        }
+
+        return in_array(strtolower($scheme), $this->schemes);
+    }
 
     /**
      * Get the provider.

@@ -74,7 +74,7 @@ class FileMatcher extends AbstractMatcher
     {
         return '<iframe
             frameborder="0"
-            src="' . $this->embed($id) . '"
+            src="' . $this->attribute($this->embed($id)) . '"
             ' . $this->html->attributes($attributes) . '></iframe>';
     }
 
