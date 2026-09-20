@@ -126,19 +126,30 @@ class VimeoMatcher extends AbstractMatcher
      */
     protected function json($id)
     {
-        return cache()->rememberForever(
-            'http://vimeo.com/api/v2/video/' . $id . '.json',
-            function () use ($id) {
+        $key = 'anomaly.field_type.video::vimeo.' . md5($id);
 
-                try {
-                    $res = (new Client())->request('GET', 'http://vimeo.com/api/v2/video/' . $id . '.json');
+        if (!is_null($json = cache()->get($key))) {
+            return $json;
+        }
 
-                    return array_get(json_decode($res->getBody()->getContents(), true), 0);
-                } catch (\Exception $exception) {
-                    return [];
-                }
-            }
-        );
+        try {
+            $res = (new Client())->request(
+                'GET',
+                'https://vimeo.com/api/v2/video/' . rawurlencode($id) . '.json',
+                [
+                    'timeout'         => 5,
+                    'connect_timeout' => 5,
+                ]
+            );
+
+            $json = array_get(json_decode($res->getBody()->getContents(), true), 0) ?: [];
+        } catch (\Exception $exception) {
+            return [];
+        }
+
+        cache()->forever($key, $json);
+
+        return $json;
     }
 
 }
